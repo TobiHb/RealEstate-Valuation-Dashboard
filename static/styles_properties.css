@@ -1,0 +1,87 @@
+body {
+    font-family: 'Inter', sans-serif;
+    background: black;
+    color: #e4e4eb;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-image: url('https://source.unsplash.com/1600x900/?stars,space');
+    background-repeat: repeat;
+    animation: stars 100s linear infinite;
+}
+
+h3 {
+    background: linear-gradient(90deg, #ff7edb, #8a4ff7);
+    -webkit-background-clip: text;
+    color: transparent;
+    text-align: center;
+    font-weight: 700;
+}
+
+.container {
+    width: 110%;
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 30px;
+    background: rgba(28, 26, 51, 0.9);
+    border-radius: 16px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    color: #e4e4eb;
+}
+
+th, td {
+    padding: 12px 20px;
+    text-align: left;
+    border-bottom: 1px solid #3a3c5b;
+}
+
+th {
+    background: linear-gradient(90deg, #ff7edb, #8a4ff7);
+    -webkit-background-clip: text;
+    color: transparent;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+td:nth-child(9), td:nth-child(10) {
+    text-align: right;
+    white-space: nowrap;
+}
+
+td:nth-child(6), td:nth-child(7), td:nth-child(8) {
+    text-align: center;
+}
+
+tr:nth-child(even) {
+    background-color: #2a2a3f;
+}
+
+tr:hover {
+    background-color: #414168;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 20px;
+    margin-top: 20px;
+    color: #fff;
+    background: linear-gradient(90deg, #ff7edb, #8a4ff7);
+    border-radius: 12px;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background: linear-gradient(90deg, #8a4ff7, #ff7edb);
+}

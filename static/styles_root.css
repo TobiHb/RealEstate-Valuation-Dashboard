@@ -1,0 +1,56 @@
+body {
+    font-family: 'Inter', sans-serif;
+    background: black;
+    color: #e4e4eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    background-image: url('https://source.unsplash.com/1600x900/?stars,space');
+    background-repeat: repeat;
+    animation: stars 100s linear infinite;
+}
+
+.home-container {
+    text-align: center;
+    background: rgba(28, 26, 51, 0.9);
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.5);
+}
+
+h1 {
+    background: linear-gradient(90deg, #ff7edb, #8a4ff7);
+    -webkit-background-clip: text;
+    color: transparent;
+    font-size: 2.8em;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin: 10px 0;
+}
+
+a {
+    color: #7c3aed;
+    text-decoration: none;
+    font-size: 1.2em;
+    font-weight: bold;
+    padding: 12px 20px;
+    background-color: #3a3c5b;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+}
+
+a:hover {
+    background-color: #4e4f70;
+    color: #e4e4eb;
+}
