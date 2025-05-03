@@ -1,0 +1,39 @@
+*** Settings ***
+Library    SeleniumLibrary
+Suite Setup    Open Browser To Application
+Suite Teardown    Close Browser
+
+*** Variables ***
+${URL}        http://127.0.0.1:5000
+${BROWSER}    Chrome
+
+*** Test Cases ***
+Add Specific Properties
+    [Documentation]    Add 5 specific properties with manually scraped data from: https://www.redfin.com/city/30749/NY/New-York
+    Add Property    Property 1    https://www.redfin.com/NY/New-York/10-Madison-Sq-W-10010/unit-14F/home/185866143    Condo              10010    281    4    5    7200000
+    Add Property    Property 2    https://www.redfin.com/NY/Rego-Park/6125-98th-St-11374/unit-9C/home/20659648    Condo              11374    72    1    1    339000
+    Add Property    Property 3    https://www.redfin.com/NY/Brooklyn/1238-63rd-St-11219/unit-203/home/176617246    Condo          11223    58    1    1    583000
+    Add Property    Property 4    https://www.redfin.com/NY/Bronx/2040-Washington-Ave-10457/home/44753929    House               10457    157    4    3    729000
+    Add Property    Property 5    https://www.redfin.com/NY/Brooklyn/83-Gelston-Ave-11209/home/40819378    Multi-family  11209    323    5    6    1680000
+
+*** Keywords ***
+Open Browser To Application
+    Open Browser    ${URL}    ${BROWSER}
+    Maximize Browser Window
+
+Add Property
+    [Arguments]    ${name}    ${link}    ${property_type}    ${zip}    ${sqm}    ${beds}    ${baths}    ${price}
+    Go To    ${URL}/newproperty
+    Input Text    name=name             ${name}
+    Input Text    name=link             ${link}
+    Select From List By Value    name=property_type    ${property_type}
+    Input Text    name=ZIP              ${zip}
+    Input Text    name=square_meters    ${sqm}
+    Input Text    name=beds             ${beds}
+    Input Text    name=baths            ${baths}
+    Input Text    name=price            ${price}
+    Submit Form
+    Page Should Contain    Successfully added New Property!
+
+Submit Form
+    Click Button    xpath=//input[@type='submit']

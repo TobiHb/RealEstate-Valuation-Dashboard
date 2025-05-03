@@ -1,0 +1,93 @@
+*** Settings ***
+Library    SeleniumLibrary
+Library    Collections
+
+*** Variables ***
+${BROWSER}              Chrome
+${CONVERSION_FACTOR}    0.092903
+${FLASK_URL}       http://127.0.0.1:5000
+
+*** Keywords ***
+Open Browser To Redfin
+    [Arguments]    ${url}
+    Open Browser    ${url}    ${BROWSER}
+    Maximize Browser Window
+
+Extract Property Info
+    [Arguments]    ${xpath}
+    Wait Until Element Is Visible    ${xpath}    10s
+    ${value}    Get Text    ${xpath}
+    RETURN    ${value}
+
+Convert Square Feet To Square Meters
+    [Arguments]    ${square_feet_text}
+    ${cleaned_text}    Evaluate    "${square_feet_text}".replace(",", "")    # Remove commas to be able to convert it into ints
+    ${square_feet}    Convert To Number    ${cleaned_text}
+    ${square_meters}    Evaluate    ${square_feet} * ${CONVERSION_FACTOR}
+    RETURN    ${square_meters}
+
+Process Single Redfin Link
+    [Arguments]    ${url}
+    Open Browser To Redfin    ${url}
+    ${price_text}    Extract Property Info    //*[@id="content"]/div[8]/div[2]/div[1]/div[1]/section/div/div/div/div[1]/div[2]/div/div/div/div/div[1]/div
+    ${price_cleaned}    Evaluate    "${price_text}".replace("$", "").replace(",", "")
+    ${price}    Convert To Number    ${price_cleaned}
+    Log To Console    Price: ${price}
+
+    ${beds_text}    Extract Property Info    //*[@id="content"]/div[8]/div[2]/div[1]/div[1]/section/div/div/div/div[1]/div[2]/div/div/div/div/div[2]/div
+    ${beds_float}    Convert To Number    ${beds_text}
+    ${beds}    Evaluate    int(${beds_float})
+    Log To Console    Beds: ${beds}
+
+    ${baths_text}    Extract Property Info    //*[@id="content"]/div[8]/div[2]/div[1]/div[1]/section/div/div/div/div[1]/div[2]/div/div/div/div/div[3]/div
+    ${baths_float}    Convert To Number    ${baths_text}
+     ${baths}    Evaluate    int(${baths_float})
+    Log To Console    Baths: ${baths}
+
+    ${ZIP}    Extract Property Info    //*[@id="content"]/div[8]/div[2]/div[1]/div[1]/section/div/div/div/div[1]/div[2]/div/div/div/header/div/h1/div[2]
+    ${clean_ZIP}    Evaluate    "${ZIP}".split()[-1]
+    Log To Console    ZIP: ${clean_ZIP}
+
+    ${square_feet}    Extract Property Info    //*[@id="content"]/div[8]/div[2]/div[1]/div[1]/section/div/div/div/div[1]/div[2]/div/div/div/div/div[4]/span
+    ${square_meters_float}    Convert Square Feet To Square Meters    ${square_feet}
+    ${square_meters}    Evaluate    int(${square_meters_float})
+    Log To Console    Square meters: ${square_meters}
+
+    RETURN    ${price}    ${beds}    ${baths}    ${clean_ZIP}    ${square_meters}
+
+
+Open Browser To Application
+    Open Browser    ${URL}    ${BROWSER}
+    Maximize Browser Window
+
+Add Property To Flask
+    [Arguments]    ${name}    ${link}    ${clean_ZIP}    ${square_meters}    ${beds}    ${baths}    ${price}
+    Go To    ${FLASK_URL}/newproperty
+    Input Text    name=name             ${name}
+    Input Text    name=link             ${link}
+    Select From List By Value    name=property_type    Condo
+    Input Text    name=ZIP              ${clean_ZIP}
+    Input Text    name=square_meters    ${square_meters}
+    Input Text    name=beds             ${beds}
+    Input Text    name=baths            ${baths}
+    Input Text    name=price            ${price}
+    SLEEP    5s
+    Submit Form
+    Page Should Contain    Successfully added New Property!
+
+Submit Form
+    Click Button    xpath=//input[@type='submit']
+
+
+*** Test Cases ***
+Process Redfin Link - Brooklyn
+    [Documentation]    Loads link and processes it.
+    ${REDFIN_LINK}    Set Variable    https://www.redfin.com/NY/New-York/212-E-95th-St-10128/home/45226924
+    ${price}    ${beds}    ${baths}    ${clean_ZIP}    ${square_meters}    Process Single Redfin Link    ${REDFIN_LINK}
+    ${name}    Set Variable    Redfin Link 1
+    Log To Console    ${name}
+    Add Property To Flask    ${name}    ${REDFIN_LINK}    ${clean_ZIP}    ${square_meters}    ${beds}    ${baths}    ${price}
+
+
+
+
