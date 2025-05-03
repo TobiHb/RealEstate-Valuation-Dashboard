@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Property</title>
+    <link rel="stylesheet" href="/static/styles_newproperty.css">
+</head>
+<body>
+<div class="form-container">
+    <h3>Add Property</h3>
+    <form method="post" action="/newproperty">
+        <label>Name:</label>
+        <input type="text" name="name" required>
+
+        <label>Link:</label>
+        <input type="text" name="link">
+
+        <label>Type:</label>
+        <select name="property_type" required>
+            <option value="" disabled selected>Select Type</option>
+            <option value="Condo">Condo</option>
+            <option value="House">House</option>
+            <option value="Townhouse">Townhouse</option>
+            <option value="Co-op">Co-op</option>
+            <option value="Multi-family">Multi-family</option>
+            <option value="For sale">For sale</option>
+            <option value="Contingent">Contingent</option>
+            <option value="Land">Land</option>
+            <option value="Foreclosure">Foreclosure</option>
+            <option value="Pending">Pending</option>
+            <option value="Coming Soon">Coming Soon</option>
+            <option value="Mobile house">Mobile house</option>
+            <option value="Condop">Condop</option>
+        </select>
+
+        <label>ZIP:</label>
+        <input type="text" name="ZIP" required>
+
+        <label>m²:</label>
+        <input type="number" name="square_meters" required>
+
+        <label>Beds:</label>
+        <input type="number" name="beds" required>
+
+        <label>Baths:</label>
+        <input type="number" name="baths" required>
+
+        <label>Price (USD):</label>
+        <input type="number" step="1" name="price">
+
+        <input type="submit" value="Add Property">
+    </form>
+    <a href="/" class="btn">Back</a>
+</div>
+</body>
+</html>
