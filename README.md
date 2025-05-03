@@ -2,6 +2,8 @@
 # Project Assignment
 ## Tobias Hundsberger
 ## h12042646
+<img width="1414" alt="image" src="https://github.com/user-attachments/assets/2e9557aa-e5f8-4bec-925d-3fc00b20b180" />
+
 
 # Real Estate Valuation Model
 In this project a Flask Server with a connected SQLite database is created. Beside servign as collector of property properties, it integrates an DecisionTree-Regressor ML-Model which calculates a property price based on the properties of the specific property, which is typed into the formula within the web application.
