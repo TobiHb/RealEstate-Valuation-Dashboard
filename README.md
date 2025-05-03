@@ -3,6 +3,9 @@
 ## Tobias Hundsberger
 ## h12042646
 <img width="1414" alt="image" src="https://github.com/user-attachments/assets/2e9557aa-e5f8-4bec-925d-3fc00b20b180" />
+<img width="632" alt="image" src="https://github.com/user-attachments/assets/00db360c-e725-48c6-a704-660b0bea7e6b" />
+<img width="1377" alt="image" src="https://github.com/user-attachments/assets/c97e9f07-c5f3-4972-bedf-1311d0daa571" />
+
 
 
 # Real Estate Valuation Model
